@@ -12,3 +12,7 @@ resource "vault_generic_secret" "example" {
     }
   )
 }
+
+resource "vault_gcp_secret_backend" "gcp" {
+  credentials = var.gcp_creds
+}

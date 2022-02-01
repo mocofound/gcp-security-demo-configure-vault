@@ -4,17 +4,27 @@ provider "vault" {
   token=var.token
 }
 
-resource "vault_generic_secret" "example" {
-  path = "secret/foo"
-
-  data_json = jsonencode(
-    {
-      "foo"   = "bar",
-      "pizza" = "cheese"
-    }
-  )
-}
-
 resource "vault_gcp_secret_backend" "gcp" {
   credentials = var.gcp_creds
+}
+
+locals {
+  project = "gcp-vault-demo-2022"
+}
+
+
+resource "vault_gcp_secret_roleset" "roleset" {
+  backend      = vault_gcp_secret_backend.gcp.path
+  roleset      = "project_owner"
+  secret_type  = "access_token"
+  project      = local.project
+  token_scopes = ["https://www.googleapis.com/auth/cloud-platform"]
+
+  binding {
+    resource = "//cloudresourcemanager.googleapis.com/projects/${local.project}"
+
+    roles = [
+      "roles/owner",
+    ]
+  }
 }

@@ -1,5 +1,7 @@
 provider "vault" {
 #Uses VAULT_ADDR and VAULT_TOKEN environment variables
+  address=var.address
+  token=var.token
 }
 
 resource "vault_generic_secret" "example" {

@@ -1,11 +1,24 @@
 provider "vault" {
 #Uses VAULT_ADDR and VAULT_TOKEN environment variables
-  address=var.address
-  token=var.token
+  address = data.terraform_remote_state.credentials.outputs.VAULT_ADDR
+  token = data.terraform_remote_state.credentials.outputs.HCP_VAULT_ADMIN_TOKEN
 }
 
-resource "vault_gcp_secret_backend" "gcp" {
-  credentials = var.gcp_creds
+data "terraform_remote_state" "credentials" {
+  backend = "remote"
+
+  config = {
+    organization = "tfc-gcp-demo"
+    workspaces = {
+      name = "gcp-security-demo-hcp-vault"
+    }
+  }
+}
+
+# Terraform >= 0.12
+resource "aws_instance" "foo" {
+  # ...
+  subnet_id = data.terraform_remote_state.vpc.outputs.subnet_id
 }
 
 locals {

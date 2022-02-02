@@ -15,6 +15,10 @@ data "terraform_remote_state" "credentials" {
   }
 }
 
+resource "vault_gcp_secret_backend" "gcp" {
+  credentials = var.gcp_creds
+}
+
 locals {
   project = "gcp-vault-demo-2022"
 }

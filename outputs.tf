@@ -1,8 +1,7 @@
-output "VAULT_ADDR" {
-    value = vault_gcp_secret_roleset.service_account_email
+output "service_account_email" {
+    value = vault_gcp_secret_roleset.roleset.service_account_email
 }
 
-output "roleset" {
+output "secret_type" {
     value = vault_gcp_secret_roleset.roleset.secret_type
 }
-

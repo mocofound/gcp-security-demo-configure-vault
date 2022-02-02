@@ -40,7 +40,8 @@ resource "vault_gcp_secret_roleset" "roleset" {
   }
 }
 
-resource "google_service_account" "this" {
+/*
+  resource "google_service_account" "this" {
   account_id = "my-awesome-account"
   display_name = "Service Account"
 }
@@ -62,3 +63,4 @@ resource "vault_gcp_secret_static_account" "static_account" {
     ]
   }
 }
+*/

@@ -1,6 +1,6 @@
-variable "gcp_creds" {
-  description = "GCP JSON Credentials"
-}
+#variable "gcp_creds" {
+#  description = "GCP JSON Credentials"
+#}
 
 variable "address" {
   description = "Vault Address"
